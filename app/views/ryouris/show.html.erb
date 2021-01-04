@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Details</h1> <!-- Ryouri page -->
+
+<p>
+  <strong>Name:</strong>
+  <%= @ryouri.name %>
+</p>
+
+<p>
+  <% if @ryouri.photo.attached? %>
+    <%= image_tag url_for(@ryouri.photo), height: 100 %>
+  <% end %>
+</p>
+
+<table>
+  <tr>
+    <strong>Ingredients</strong>
+  </tr>
+  <br>
+  <br>
+  <% @ingredients.each do |ingredient| %>
+    <tr>
+      <td><%= ingredient.name %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
+
+<p>
+  <strong>How to make</strong>
+  <br>
+  <%= simple_format(@ryouri.howtomake) %>
+</p>
+
+<footer>
+<%= link_to 'Edit', edit_ryouri_path(@ryouri) %> |
+<%= link_to 'Back', ryouris_path %>
+</footer>

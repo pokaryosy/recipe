@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Details</h1> <!-- Ingredients#show -->
+
+<p>
+  <strong>Name:</strong>
+  <%= @ingredient.name %>
+</p>
+
+<p>
+  <% if @ingredient.photo.attached? %>
+    <%= image_tag url_for(@ingredient.photo), height: 100 %>
+  <% end %>
+</p>
+
+<table>
+  <tr>
+    <strong>Recipes</strong>
+  </tr>
+  <br>
+  <br>
+  <% @ryouris.each do |ryouri| %>
+    <tr>
+      <td><%= ryouri.name %></td>
+    </tr>
+  <% end %>
+</table>
+
+<footer>
+<%= link_to 'Edit', edit_ingredient_path(@ingredient) %> |
+<%= link_to 'Back', ingredients_path %>
+</footer>

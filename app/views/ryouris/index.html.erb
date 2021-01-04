@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>My Recipe</h1> <!-- Ryouri page -->
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Ingredient</th>
+      <!-- <th colspan="3"></th>-->
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ryouris.each do |ryouri| %>
+      <tr>
+        <td><%= ryouri.name %></td>
+        <% @x = Ingredient.find(ryouri.ingredient_ids) %><!-- ryouri.ingredient.name   Ingredient.find(ryouri.ingredient_ids).name -->
+        <td><%= @x.pluck(:name) %></td>
+        <td><%= link_to 'Show', ryouri %></td>
+        <td><%= link_to 'Edit', edit_ryouri_path(ryouri) %></td>
+        <td><%= link_to 'Destroy', ryouri, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<footer>
+  <%= link_to 'New Recipe', new_ryouri_path %>
+  <%= link_to 'Ingredients', ingredients_path %>
+</footer>

@@ -1,0 +1,42 @@
+<%= form_with(model: ryouri) do |form| %>
+  <% if ryouri.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ryouri.errors.count, "error") %> prohibited this ryouri from being saved:</h2>
+
+      <ul>
+        <% ryouri.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ingredients %>
+    <%= form.collection_check_boxes(:ingredient_ids, Ingredient.all, :id, :name) do |b| %>
+      <%= b.label { b.check_box + b.text } %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :photo %>
+    <%= form.file_field :photo %>
+    <% if @ryouri.photo.attached? %>
+      <%= @ryouri.photo.purge %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :howtomake %>
+    <%= form.text_area :howtomake, :size=>'50×10' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
